@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/iveahugeship/go-finder"
+	finder "github.com/iveahugeship/gofind"
 )
 
 func main() {

@@ -3,7 +3,7 @@ package finder
 import (
 	"os"
 
-	"github.com/iveahugeship/go-finder/utils"
+	"github.com/iveahugeship/gofind/utils"
 )
 
 type DateFilter struct {

@@ -1,4 +1,4 @@
-module github.com/iveahugeship/go-finder
+module github.com/iveahugeship/gofind
 
 go 1.23.1
 
