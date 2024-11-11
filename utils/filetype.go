@@ -5,23 +5,31 @@ import (
 )
 
 var (
-	DevType       = NewFileType('b', fs.ModeDevice)
-	CharDevType   = NewFileType('c', fs.ModeCharDevice)
-	SymlinkType   = NewFileType('l', fs.ModeSymlink)
-	SocketType    = NewFileType('s', fs.ModeSocket)
-	NamedPipeType = NewFileType('p', fs.ModeNamedPipe)
-	DirType       = NewFileType('d', fs.ModeDir)
-	RegularType   = NewFileType('f', 0)
+	DevType       = NewFileType("DevType", fs.ModeDevice)
+	CharDevType   = NewFileType("CharDevType", fs.ModeCharDevice)
+	SymlinkType   = NewFileType("SymlinkType", fs.ModeSymlink)
+	SocketType    = NewFileType("SocketType", fs.ModeSocket)
+	NamedPipeType = NewFileType("NamedPipeType", fs.ModeNamedPipe)
+	DirType       = NewFileType("DirType", fs.ModeDir)
+	RegularType   = NewFileType("RegularType", 0)
 )
 
 type FileType struct {
-	String byte
-	Mode   fs.FileMode
+	name string
+	mode fs.FileMode
 }
 
-func NewFileType(s byte, m fs.FileMode) FileType {
+func NewFileType(name string, mode fs.FileMode) FileType {
 	return FileType{
-		String: s,
-		Mode:   m,
+		name: name,
+		mode: mode,
 	}
+}
+
+func (f FileType) String() string {
+	return f.name
+}
+
+func (f FileType) IsTypeOf(info fs.FileInfo) bool {
+	return f.mode == info.Mode().Type()
 }
