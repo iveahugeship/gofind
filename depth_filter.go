@@ -12,9 +12,8 @@ type DepthFilter struct {
 func (f DepthFilter) Match(root string, path string) (bool, error) {
 	root, path = filepath.Clean(root), filepath.Clean(path)
 	sep := string(filepath.Separator)
-
 	diff := strings.TrimPrefix(path, root)
-	return f.n >= len(strings.Split(diff, sep)), nil
+	return f.n >= strings.Count(diff, sep)+1, nil
 }
 
 func ByDepth(n int) Option {
