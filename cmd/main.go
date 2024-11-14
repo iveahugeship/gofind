@@ -13,7 +13,8 @@ func main() {
 		// finder.ByName("*.yaml"),
 		// finder.ByDate('<', "2024-11-30"),
 		finder.ByType(utils.DirType),
-		finder.ByDepth(1),
+		finder.ByMinDepth(1),
+		finder.ByMaxDepth(2),
 	)
 	hits, _ := f.Find()
 	// fmt.Println(len(hits))

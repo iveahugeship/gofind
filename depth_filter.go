@@ -1,24 +1,36 @@
 package finder
 
 import (
-	"path/filepath"
-	"strings"
+	"github.com/iveahugeship/gofind/utils"
 )
 
-type DepthFilter struct {
+type MinDepthFilter struct {
 	n int
 }
 
-func (f DepthFilter) Match(root string, path string) (bool, error) {
-	root, path = filepath.Clean(root), filepath.Clean(path)
-	sep := string(filepath.Separator)
-	diff := strings.TrimPrefix(path, root)
-	return f.n >= strings.Count(diff, sep)+1, nil
+func (f MinDepthFilter) Match(root string, path string) (bool, error) {
+	return f.n <= utils.CountDepth(root, path), nil
 }
 
-func ByDepth(n int) Option {
+func ByMinDepth(n int) Option {
 	return func(f *Finder) {
-		f.filters = append(f.filters, DepthFilter{
+		f.filters = append(f.filters, MinDepthFilter{
+			n: n,
+		})
+	}
+}
+
+type MaxDepthFilter struct {
+	n int
+}
+
+func (f MaxDepthFilter) Match(root string, path string) (bool, error) {
+	return f.n >= utils.CountDepth(root, path), nil
+}
+
+func ByMaxDepth(n int) Option {
+	return func(f *Finder) {
+		f.filters = append(f.filters, MaxDepthFilter{
 			n: n,
 		})
 	}
