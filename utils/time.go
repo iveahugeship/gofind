@@ -22,14 +22,3 @@ func ParseDate(s string) (time.Time, error) {
 	// Return zero value if parsing fails
 	return time.Time{}, err
 }
-
-func CompareDate(op byte, a time.Time, b time.Time) bool {
-	switch op {
-	case '>':
-		return b.After(a)
-	case '<':
-		return b.Before(a)
-	default:
-		return false
-	}
-}

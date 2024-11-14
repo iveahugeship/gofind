@@ -11,7 +11,7 @@ func main() {
 	f := finder.NewFinder(
 		"/Users/iveahugeship/Projects/pulsepoint/kubernetes/monitoring/configs/prometheus-server/alerts.d",
 		// finder.ByName("*.yaml"),
-		// finder.ByDate('<', "2024-11-30"),
+		finder.BySinceDate("2024-11-13"),
 		finder.ByType(utils.DirType),
 		finder.ByMinDepth(1),
 		finder.ByMaxDepth(2),
