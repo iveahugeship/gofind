@@ -3,11 +3,11 @@ package finder
 import (
 	"os"
 
-	"github.com/iveahugeship/gofind/utils"
+	"github.com/iveahugeship/gofind/utils/file"
 )
 
 type TypeFilter struct {
-	ftype utils.FileType
+	ftype file.FileType
 }
 
 func (f TypeFilter) Match(_ string, path string) (bool, error) {
@@ -18,7 +18,7 @@ func (f TypeFilter) Match(_ string, path string) (bool, error) {
 	return f.ftype.IsTypeOf(info), nil
 }
 
-func ByType(ftype utils.FileType) Option {
+func ByType(ftype file.FileType) Option {
 	return func(f *Finder) {
 		f.filters = append(f.filters, TypeFilter{
 			ftype: ftype,

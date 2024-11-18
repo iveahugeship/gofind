@@ -9,7 +9,7 @@ type SinceMtimeFilter struct {
 }
 
 func (f SinceMtimeFilter) Match(_ string, path string) (bool, error) {
-	return f.mtime.Before(path)
+	return f.mtime.NewerOf(path)
 }
 
 func BySinceMtime(d string) Option {
@@ -26,10 +26,10 @@ type UntilMtimeFilter struct {
 }
 
 func (f UntilMtimeFilter) Match(_ string, path string) (bool, error) {
-	return f.mtime.After(path)
+	return f.mtime.OlderOf(path)
 }
 
-func ByUntilDate(d string) Option {
+func ByUntilMtime(d string) Option {
 	return func(f *Finder) {
 		mtime, _ := file.NewModTime(d)
 		f.filters = append(f.filters, UntilMtimeFilter{

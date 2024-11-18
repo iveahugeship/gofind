@@ -17,7 +17,7 @@ func NewModTime(s string) (ModTime, error) {
 	return ModTime{t: t}, nil
 }
 
-func (m ModTime) After(path string) (bool, error) {
+func (m ModTime) OlderOf(path string) (bool, error) {
 	fileTime, err := getFileModTime(path)
 	if err != nil {
 		return false, err
@@ -25,7 +25,7 @@ func (m ModTime) After(path string) (bool, error) {
 	return m.t.After(fileTime), err
 }
 
-func (m ModTime) Before(path string) (bool, error) {
+func (m ModTime) NewerOf(path string) (bool, error) {
 	fileTime, err := getFileModTime(path)
 	if err != nil {
 		return false, err

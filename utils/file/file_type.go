@@ -1,4 +1,4 @@
-package utils
+package file
 
 import (
 	"io/fs"
@@ -24,10 +24,6 @@ func NewFileType(name string, mode fs.FileMode) FileType {
 		name: name,
 		mode: mode,
 	}
-}
-
-func (f FileType) String() string {
-	return f.name
 }
 
 func (f FileType) IsTypeOf(info fs.FileInfo) bool {
