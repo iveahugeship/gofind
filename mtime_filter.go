@@ -12,9 +12,9 @@ func (f SinceMtimeFilter) Match(_ string, path string) (bool, error) {
 	return f.mtime.NewerOf(path)
 }
 
-func BySinceMtime(d string) Option {
+func BySinceMtime(t string) Option {
 	return func(f *Finder) {
-		mtime, _ := file.NewModTime(d)
+		mtime, _ := file.NewModTime(t)
 		f.filters = append(f.filters, SinceMtimeFilter{
 			mtime: mtime,
 		})
@@ -29,9 +29,9 @@ func (f UntilMtimeFilter) Match(_ string, path string) (bool, error) {
 	return f.mtime.OlderOf(path)
 }
 
-func ByUntilMtime(d string) Option {
+func ByUntilMtime(t string) Option {
 	return func(f *Finder) {
-		mtime, _ := file.NewModTime(d)
+		mtime, _ := file.NewModTime(t)
 		f.filters = append(f.filters, UntilMtimeFilter{
 			mtime: mtime,
 		})

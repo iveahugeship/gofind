@@ -26,11 +26,8 @@ func (m ModTime) OlderOf(path string) (bool, error) {
 }
 
 func (m ModTime) NewerOf(path string) (bool, error) {
-	fileTime, err := getFileModTime(path)
-	if err != nil {
-		return false, err
-	}
-	return m.t.Before(fileTime), nil
+	res, err := m.OlderOf(path)
+	return !res, err
 }
 
 func parseModTime(s string) (time.Time, error) {
