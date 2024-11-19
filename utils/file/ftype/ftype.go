@@ -1,4 +1,4 @@
-package file
+package ftype
 
 import (
 	"io/fs"
