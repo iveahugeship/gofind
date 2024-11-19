@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// layout defines a custom type representing a list of time format strings.
 type layout []string
 
 // ModTime represents a modification time given as a raw string.
