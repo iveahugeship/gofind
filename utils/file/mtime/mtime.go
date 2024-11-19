@@ -19,7 +19,9 @@ type ModTime struct {
 // Returns:
 // - ModTime: A new instance of the ModTime struct.
 func NewModTime(mtime string) ModTime {
-	return ModTime{raw: mtime}
+	return ModTime{
+		raw: mtime,
+	}
 }
 
 // OlderOf checks if the ModTime instance represents a time older than the file's modification time.
