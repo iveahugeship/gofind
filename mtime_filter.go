@@ -1,39 +1,37 @@
 package finder
 
 import (
-	"github.com/iveahugeship/gofind/utils/file"
+	"github.com/iveahugeship/gofind/utils/file/mtime"
 )
 
 type SinceMtimeFilter struct {
-	mtime file.ModTime
+	mtime mtime.ModTime
 }
 
 func (f SinceMtimeFilter) Match(_ string, path string) (bool, error) {
 	return f.mtime.NewerOf(path)
 }
 
-func BySinceMtime(t string) Option {
+func BySinceMtime(s string) Option {
 	return func(f *Finder) {
-		mtime, _ := file.NewModTime(t)
 		f.filters = append(f.filters, SinceMtimeFilter{
-			mtime: mtime,
+			mtime: mtime.NewModTime(s),
 		})
 	}
 }
 
 type UntilMtimeFilter struct {
-	mtime file.ModTime
+	mtime mtime.ModTime
 }
 
 func (f UntilMtimeFilter) Match(_ string, path string) (bool, error) {
 	return f.mtime.OlderOf(path)
 }
 
-func ByUntilMtime(t string) Option {
+func ByUntilMtime(s string) Option {
 	return func(f *Finder) {
-		mtime, _ := file.NewModTime(t)
 		f.filters = append(f.filters, UntilMtimeFilter{
-			mtime: mtime,
+			mtime: mtime.NewModTime(s),
 		})
 	}
 }
