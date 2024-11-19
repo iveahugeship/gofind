@@ -9,9 +9,7 @@ import (
 type layout []string
 
 // ModTime represents a modification time given as a raw string.
-type ModTime struct {
-	raw string
-}
+type ModTime string
 
 // NewModTime creates a new ModTime instance from the provided raw string.
 // Parameters:
@@ -19,9 +17,7 @@ type ModTime struct {
 // Returns:
 // - ModTime: A new instance of the ModTime struct.
 func NewModTime(mtime string) ModTime {
-	return ModTime{
-		raw: mtime,
-	}
+	return ModTime(mtime)
 }
 
 // OlderOf checks if the ModTime instance represents a time older than the file's modification time.
@@ -71,13 +67,13 @@ func (m ModTime) mtime() (time.Time, error) {
 
 	// Attempt to parse the raw time string using each layout.
 	for _, layout := range layouts {
-		if mtime, err := time.Parse(layout, m.raw); err == nil {
+		if mtime, err := time.Parse(layout, string(m)); err == nil {
 			return mtime, nil
 		}
 	}
 
 	// Return an error if none of the layouts match.
-	return time.Time{}, NewInvalidTimeFormatError(m.raw)
+	return time.Time{}, NewInvalidTimeFormatError(string(m))
 }
 
 // ftime retrieves the modification time of the specified file.
