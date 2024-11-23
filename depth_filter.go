@@ -1,7 +1,7 @@
 package finder
 
 import (
-	"github.com/iveahugeship/gofind/utils"
+	"github.com/iveahugeship/gofind/utils/file/depth"
 )
 
 type MinDepthFilter struct {
@@ -9,7 +9,8 @@ type MinDepthFilter struct {
 }
 
 func (f MinDepthFilter) Match(root string, path string) (bool, error) {
-	return f.n <= utils.CountDepth(root, path), nil
+	d := depth.NewDepth(root)
+	return d.UpperOf(path, f.n), nil
 }
 
 func ByMinDepth(n int) Option {
@@ -25,7 +26,8 @@ type MaxDepthFilter struct {
 }
 
 func (f MaxDepthFilter) Match(root string, path string) (bool, error) {
-	return f.n >= utils.CountDepth(root, path), nil
+	d := depth.NewDepth(root)
+	return d.LowerOf(path, f.n), nil
 }
 
 func ByMaxDepth(n int) Option {
