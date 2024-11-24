@@ -14,6 +14,7 @@ func main() {
 		finder.ByType(ftype.DirType),
 		finder.ByMinDepth(1),
 		finder.ByMaxDepth(3),
+		// finder.ByRegex(regexp.MustCompile(".*asd/")),
 	)
 	hits, _ := f.Find()
 	fmt.Println(len(hits))
