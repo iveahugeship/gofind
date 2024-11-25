@@ -6,10 +6,12 @@ import (
 )
 
 type filters []Filter
+type executes []Execute
 
 type Finder struct {
-	root    string
-	filters filters
+	root     string
+	filters  filters
+	executes executes
 }
 
 func NewFinder(root string, opts ...Option) *Finder {
@@ -31,6 +33,11 @@ func (f Finder) Find() ([]string, error) {
 		}
 		if isMatch {
 			hits = append(hits, path)
+			for _, exec := range f.executes {
+				if err := exec.Exec(path); err != nil {
+					return NewExecRuntimeError(exec.ID())
+				}
+			}
 		}
 		return err
 	})

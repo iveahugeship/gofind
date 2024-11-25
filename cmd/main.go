@@ -14,11 +14,15 @@ func main() {
 		finder.ByType(ftype.DirType),
 		finder.ByMinDepth(1),
 		finder.ByMaxDepth(3),
+		finder.WithPrintExec(),
 		// finder.ByRegex(regexp.MustCompile(".*asd/")),
+		// TODO:
+		// perm filter
+		// uid filter
+		// gid filter
+		// size filter
+		// fs filter?
 	)
 	hits, _ := f.Find()
 	fmt.Println(len(hits))
-	for k, v := range hits {
-		fmt.Println(k, v)
-	}
 }

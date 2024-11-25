@@ -63,17 +63,17 @@ func (d Depth) depth(path string) (int, bool) {
 	diff := strings.TrimPrefix(path, d.root)
 	count := strings.Count(diff, separator)
 
-	// When path is lower than root or equal
+	// When path is lower than root or equal.
 	if strings.HasPrefix(path, d.root) {
 		return count, true
 	}
 
-	// When path is upper that root
+	// When path is upper that root.
 	if strings.HasPrefix(d.root, path) {
 		return -count, true
 	}
 
-	// When path and root is completely different
+	// When path and root is completely different.
 	return 0, false
 }
 
