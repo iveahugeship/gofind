@@ -9,15 +9,15 @@ import (
 
 func main() {
 	f := finder.NewFinder(
-		"/Users/iveahugeship/Projects/pulsepoint/kubernetes/monitoring/configs/prometheus-server/alerts.d",
+		"/Users/iveahugeship/Projects/personal/gofind",
 		// finder.BySinceMtime("2024-11-16"),
 		finder.ByType(ftype.DirType),
 		finder.ByMinDepth(1),
 		finder.ByMaxDepth(3),
+		finder.ByPerm(0777),
 		finder.WithPrintExec(),
 		// finder.ByRegex(regexp.MustCompile(".*asd/")),
 		// TODO:
-		// perm filter
 		// uid filter
 		// gid filter
 		// size filter
