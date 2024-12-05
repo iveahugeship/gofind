@@ -52,7 +52,7 @@ func WithExec(id string, exec executor) Option {
 // Returns:
 // - Option: A function that modifies the Finder's executes list with the print execution.
 func WithPrintExec() Option {
-	return WithExec("DeleteExec", func(path string) error {
+	return WithExec("PrintExec", func(path string) error {
 		_, err := fmt.Println(path)
 		return err
 	})
