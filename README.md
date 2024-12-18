@@ -36,7 +36,7 @@ func main() {
 	// Create a new Finder with various search criteria
 	f := finder.NewFinder(
 		"/Users/iveahugeship/Projects/personal/gofind",
-        finder.BySinceMtime("2024-11-16"),	// Filters results to include items modified on or after November 16, 2024
+    	finder.BySinceMtime("2024-11-16"),	// Filters results to include items modified on or after November 16, 2024
 		finder.ByType(ftype.DirType),       // Search for directories only
 		finder.ByMinDepth(1),               // Start search at depth 1
 		finder.ByMaxDepth(3),               // Search up to depth 3
